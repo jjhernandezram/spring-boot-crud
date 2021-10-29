@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+<div>
+  <nav th:replace="layouts :: navbar"></nav>
+</div>
+
+<div class="container mt-5">
+  <form action="/projects/save" th:object="${project}" method="POST">
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Project Name</label>
+      <input type="text" class="form-control" th:field="${project.name}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Project Stage</label>
+      <select class="form-select" th:field="${project.stage}">
+        <option th:value="NOTSTARTED" value="NOTSTARTED">Not started</option>
+        <option th:value="INPROGRESS" value="INPROGRESS">In progress</option>
+        <option th:value="COMPLETED" value="COMPLETED">Completed</option>
+      </select>
+    </div>
+
+    <div class="form-floating mb-3">
+      <textarea class="form-control" style="height: 100px" th:field="${project.description}"></textarea>
+      <label for="floatingTextarea2">Project description</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Project Stage</label>
+      <select class="form-select" th:field="*{employees}" multiple="multiple">
+        <option th:each="emp : ${allEmployees}"
+                th:value="${emp.employeeId}"
+                th:text="${emp.firstName} + ' ' + ${emp.lastName}">Not started
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Create project</button>
+  </form>
+</div>
+</body>
+</html>

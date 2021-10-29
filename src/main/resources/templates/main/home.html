@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+<div>
+  <nav th:replace="layouts :: navbar"></nav>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-7">
+      <span class="col fs-4 fw-bold p-1">
+        List of Projects <span th:text="${versionNumber}"></span>
+      </span>
+      <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Project Name</th>
+          <th scope="col">Project Stage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pro, itr : ${projects}">
+          <th scope="row" th:text="${itr.index + 1}"></th>
+          <td th:text="${pro.name}"></td>
+          <td th:text="${pro.stage}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <span class="col fs-4 fw-bold p-1">
+        List of Employees
+      </span>
+      <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Project Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emp, itr : ${employeesListProjectsCount}">
+          <th scope="row" th:text="${itr.index + 1}"></th>
+          <td th:text="${emp.firstName}"></td>
+          <td th:text="${emp.lastName}"></td>
+          <td th:text="${emp.projectCount}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-5">
+      <canvas id="myChart" width="100" height="100"></canvas>
+      <script>var chartData="[[${projectStatusCount}]]"</script>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" th:src="@{js/myChart.js}"></script>
+</body>
+</html>
